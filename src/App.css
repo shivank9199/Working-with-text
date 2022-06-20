@@ -8,14 +8,10 @@
 
 textarea {
   width: 50vw;
-  height: 40vh;
+  height: 20vh;
 }
 
 .extra {
   text-align: left;
   line-height: 1rem;
-}
-
-.all {
-  height: 100vh;
 }
