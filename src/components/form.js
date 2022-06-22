@@ -1,6 +1,4 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
-import App from '../App';
 
 export default function TextForm(props) {
 
@@ -19,7 +17,6 @@ export default function TextForm(props) {
 
   const textAgain = (event) => {
     setValue(event.target.value);
-    props.showAlert('Text added', 'success')
   }
 
   return (
@@ -33,19 +30,19 @@ export default function TextForm(props) {
           </div>
 
           <div className='extra'>
-            <button className='btn' style={{backgroundColor: props.mode==='light'?'#22bca5':'#22bca5', color: props.mode==='light'?'black':'black', marginTop: 5, marginRight: 4}} onClick={handleUpButton}>Change to Uppercase</button>
-            <button className='btn' style={{backgroundColor: props.mode==='light'?'#22bca5':'#22bca5', color: props.mode==='light'?'black':'black', marginTop: 5, marginRight: 4}} onClick={handleLowButton}>Change to lowerCase</button>
+            <button className='btn' disabled= {text.length===0} style={{backgroundColor: props.mode==='light'?'#22bca5':'#22bca5', color: props.mode==='light'?'black':'black', marginTop: 5, marginRight: 4}} onClick={handleUpButton}>Change to Uppercase</button>
+            <button className='btn' disabled= {text.length===0} style={{backgroundColor: props.mode==='light'?'#22bca5':'#22bca5', color: props.mode==='light'?'black':'black', marginTop: 5, marginRight: 4}} onClick={handleLowButton}>Change to lowerCase</button>
           </div>
 
           <div className='extra' style={{marginTop: 10}}>
             <h3>Summary</h3>
-            <p>Your number of words are <b>{text.split(" ").length}</b> and number of characters are <b>{text.length}</b></p>
-            <p>It will take <b>{0.2* (text.split(" ").length)} seconds</b> to read</p>
+            <p>Your number of words are <b>{text.split(" ").filter((e) => {return e.length !== 0}).length}</b> and number of characters are <b>{text.length}</b></p>
+            <p>It will take <b>{0.2* (text.split(" ").filter((e) => {return e.length !== 0}).length)} seconds</b> to read</p>
           </div>
 
           <div className='extra'>
             <h3>Preview</h3>
-            <p>{text.length>0?text:'Enter some text to see summary'}</p>
+            <p>{text.length>0?text:'Nothing to preview'}</p>
           </div>
           
       </div>

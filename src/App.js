@@ -3,6 +3,12 @@ import './App.css';
 import Alert from './components/Alert';
 import TextForm from './components/Form.js';
 import Navbar from './components/Navbar';
+import About from './components/About';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 
 function App() {
 
@@ -18,10 +24,11 @@ function App() {
   }
 
   const [mode, setMode] = useState('light');
-  const toggle = () => {
+
+  const toggle1 = () => {
     if (mode === 'light') {
       setMode('dark');
-      document.body.style.backgroundColor = '#051f39';
+      document.body.style.backgroundColor = 'black';
       document.body.style.color = 'white';
       showAlert('Dark mode enabled', 'success');
     }
@@ -33,26 +40,18 @@ function App() {
     }
   }
 
-  const toggle1 = () => {
-    if (mode === 'light') {
-      setMode('dark');
-      document.body.style.backgroundColor = 'black';
-      document.body.style.color = 'white';
-      showAlert('Black mode enabled', 'success');
-    }
-    else {
-      setMode('light');
-      document.body.style.backgroundColor = 'white';
-      document.body.style.color = 'black';
-      showAlert('Light mode enabled', 'success');
-    }
-  }
-
   return (
     <div>
-      <Navbar mode={mode} toggleMode={toggle} toggle1Mode={toggle1}/>
+    <Router>
+      <Navbar mode={mode} toggle1Mode={toggle1}/>
       <Alert alert={alert}/>
-      <TextForm showAlert={showAlert} mode={mode}/>;
+      <div className='container my-3'>
+        <Routes>
+            <Route path="/about" element={<About mode={mode}/>}/>
+            <Route path="/" element={<TextForm showAlert={showAlert} mode={mode}/>}/>
+        </Routes>
+      </div>
+    </Router>
     </div>
   );
 }
